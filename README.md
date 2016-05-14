@@ -1,0 +1,2 @@
+# PlagueSimulation
+KTH ICT Assignment
