@@ -28,10 +28,10 @@ public class Sick extends Individual {
 	}
 	public int gen_days(int min, int max)
     {
-        int diff = max-min;
+        int diff = max-min+1;
         Random rec = new Random();
         int random= rec.nextInt(diff);
-        int randomDays = random + min;
+        int randomDays = random-1 + min;
         
         return randomDays;
     }
