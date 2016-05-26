@@ -28,12 +28,12 @@ public class Main {
 		System.out.println("minDygn :\t" +minDygn);
 		System.out.println("maxDygn :\t" +maxDygn);
 		System.out.println("Death rate :\t" +L + "%");
-		System.out.print("Initial sick");
+		System.out.print("Initial sick : \t");
 				
 		ListIterator<Location> li = ll.listIterator();
 		while(li.hasNext()){
 			Location loc = li.next();
-			System.out.print("("+loc.row +","+loc.column+")\t");
+			System.out.print("("+loc.row +","+loc.column+") \t");
 		}
 			System.out.println();
 
