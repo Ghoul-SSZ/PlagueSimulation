@@ -1,13 +1,19 @@
 package plague;
+import java.util.LinkedList;
+import java.util.ListIterator;
 
 public class World {
 	
 	public Individual[][] world;
 	public int N;
 	
-	public int healthy_count=0;
-	public int sick_count=0;
-	public int death_count=0;
+	public int healthy_count=0;	
+	public int sick_count=0;		// How many people are sick -> by calculating the board of sick people
+	public int death_count=0;		// How many people are dead	-> by calculating the board of dead people
+	public int daily_R = 0;			// How many people recovered today -> accumulating each time someone is recovered, reset every day
+	public int daily_S = 0;			// How many people infected today	-> accumulating each time someone is infected, reset every day
+	public int daily_D = 0;			// How many people died today	-> accumulating each time someone dies, reset every day
+	public int total_sick;			// How many people have been sick -> initialize by how big array is, add newly infected every day
 	
 	// world of healthy people
 	public World(int N){
@@ -19,7 +25,7 @@ public class World {
 	}
 	
 	// world with a few sick people
-	public World(int N, Location[] array){
+	public World(int N, LinkedList<Location> list){
 		
 		this.N = N;
 		world = new Individual[N][N];
@@ -27,16 +33,21 @@ public class World {
 			for(int j=0; j<N; j++){
 				world[i][j]= new Healthy();}
 		}
-		for(int i = 0; i< array.length; i++){
-			
-			int row = array[i].row;
-			int column = array[i].column;
-			world[row][column]= new Sick();
-			
+		
+		ListIterator<Location> li = list.listIterator();
+		while(li.hasNext()){
+			Location loc = li.next();
+				world[loc.row][loc.column] = new Sick();	
 		}
+		total_sick = list.size();
+		sick_count = total_sick;
 	}
 	
 	public void reset_count(){
+		total_sick += daily_S;
+		daily_D = 0;
+		daily_S = 0;
+		daily_R = 0;
 		healthy_count=0;
 		sick_count=0;
 		death_count=0;
@@ -63,11 +74,13 @@ public class World {
 					{
 						if (s.end_day==Main.day){
 							world[i][j]= new Healthy(true);
+							daily_R ++;
 						}
 						else {
 							if (s.is_killed()==true)
 							{
 								world[i][j]= new Dead();
+								daily_D ++;
 							}
 							else
 								local_spread(i,j);
@@ -78,9 +91,8 @@ public class World {
 					healthy_count++;
 				else if(world[i][j].status== "dead")
 					death_count++;
-//				System.out.print(world[i][j]+" ");
+
 			}
-//			System.out.println();
 		}
 	}
 	
@@ -94,6 +106,7 @@ public class World {
 				if (h.get_infected()== true)
 				{
 					world[l.row][l.column] = new Sick();
+					daily_S ++;
 				}
 			}
 		}
