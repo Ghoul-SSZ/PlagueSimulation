@@ -11,7 +11,7 @@ public class Healthy extends Individual {
 	}
 	
 	public Healthy(boolean immune){
-		status = "healthy";
+		status = "immune";
 		this.immune = immune;
 	}
 	
@@ -28,7 +28,7 @@ public class Healthy extends Individual {
             {return true;}
 	}
 
-	
+
 
 
 }
