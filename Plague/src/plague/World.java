@@ -69,7 +69,6 @@ public class World {
 				if (world[i][j].status== "sick")
 				{
 					Sick s = (Sick) world[i][j];
-					sick_count++;
 					if(s.infect_day != Main.day)
 					{
 						if (s.end_day==Main.day){
@@ -82,9 +81,12 @@ public class World {
 								world[i][j]= new Dead();
 								daily_D ++;
 							}
-							else
+							else{
 								local_spread(i,j);
+								sick_count++;
+							}
 						}
+
 					}
 				}
 				else if(world[i][j].status== "healthy")
