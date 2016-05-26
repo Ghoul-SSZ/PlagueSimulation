@@ -13,7 +13,7 @@ public class Main {
 	public static int L;
 	public static int day=0;
 	public static LinkedList<Location> ll = new LinkedList<Location>();
-	public static boolean[] display = {false,false,false,false,false,false,false};
+	public static boolean[] display = new boolean[7];
 
 
 
