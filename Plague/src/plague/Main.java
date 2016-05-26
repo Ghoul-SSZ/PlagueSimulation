@@ -23,6 +23,19 @@ public class Main {
 		init();
 		select_print();
 		World world = new World(N,ll);
+		System.out.println("Size :\t" +N);
+		System.out.println("Contagious :\t" +S +"%");
+		System.out.println("minDygn :\t" +minDygn);
+		System.out.println("maxDygn :\t" +maxDygn);
+		System.out.println("Death rate :\t" +L + "%");
+		System.out.print("Initial sick");
+				
+		ListIterator<Location> li = ll.listIterator();
+		while(li.hasNext()){
+			Location loc = li.next();
+			System.out.print("("+loc.row +","+loc.column+")\t");
+		}
+			System.out.println();
 
 		do{
 			world.reset_count();
@@ -76,7 +89,7 @@ public class Main {
 			ListIterator<Location> li = ll.listIterator();
 			while(true){
 				temp ++;
-				System.out.print("Enter Location " +temp+" row:\t");
+				System.out.print("Enter Location " +temp+" row :\t");
 				if(!sc.hasNextInt()) {break;}
 				int row = sc.nextInt();
 				while(row>=N){
@@ -87,7 +100,7 @@ public class Main {
 				System.out.println();
 
 
-				System.out.print("Enter Location " +temp+" column:\t");
+				System.out.print("Enter Location " +temp+" column :\t");
 				if(!sc.hasNextInt()) {break;}
 				int column = sc.nextInt();
 				while(column>=N){
