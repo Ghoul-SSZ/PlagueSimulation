@@ -33,7 +33,7 @@ public class Main {
 		ListIterator<Location> li = ll.listIterator();
 		while(li.hasNext()){
 			Location loc = li.next();
-			System.out.print("("+loc.row +","+loc.column+") \t");
+			System.out.print("("+loc.row +","+loc.column+")  ");
 		}
 			System.out.println();
 
